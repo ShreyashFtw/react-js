@@ -1,8 +1,13 @@
-
+import Cricket from "./Cricket";
 
 function App() {
   return (
-    <h1>Shreyash op</h1>
+    <>
+    <Cricket />
+    <h1>cricket is a bat and ball game</h1>
+    </>
+    //fragment concept
+  //here it returns only one element
   );
 }
 

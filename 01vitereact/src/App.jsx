@@ -1,9 +1,11 @@
-
-
+import Cricket from "./cricket"
 function App() {
 
   return (
-    <h1>Shreyash op</h1>
+    <>
+    <Cricket />
+    <h1>Football is a game</h1>
+    </>
   )
 }
 
