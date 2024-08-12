@@ -4,13 +4,22 @@ import viteLogo from "/vite.svg";
 import "./App.css";
 
 function App() {
-  let [counter , setCounter] = useState(0);//variable, its function
+  const [counter , setCounter] = useState(0);//variable, its function
   //let counter = 5;
 
   const addValue = () => {
     // counter = counter + 1;
     setCounter(counter + 1);
-    // console.log("Button clicked",counter);
+    //for a interview question
+    // setCounter(prevCounter => prevCounter + 1)
+    // setCounter(prevCounter => prevCounter + 1)
+    // setCounter(prevCounter => prevCounter + 1)
+    // setCounter(prevCounter => prevCounter + 1)
+    //this will update it from 5 to 9 and if we dont use callback,it will
+    // just increase by 1 from 5 to 6 ,for setCounter(counter + 1) x 4 ;
+
+
+    console.log("Button clicked",counter);
   };
   //UI updation is controlled by react
 
