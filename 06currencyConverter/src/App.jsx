@@ -6,40 +6,34 @@ function App() {
   const [amount, setAmount] = useState('');
   const [from, setFrom] = useState('usd');
   const [to, setTo] = useState('inr');
-  const [convertedAmount, setConvertedAmount] = useState('');
+  const [convertedAmount, setConvertedAmount] = useState(0);
 
   const currencyInfo = useCurrencyInfo(from);
+
+  // Check if currencyInfo exists before using it
   const options = currencyInfo ? Object.keys(currencyInfo) : [];
 
   const swap = () => {
-    setFrom(prevFrom => {
-      setTo(prevFrom);
-      return to;
-    });
-    setTo(prevTo => {
-      const newAmount = convertedAmount ? convertedAmount.toString() : '';
-      setAmount(newAmount);
-      return prevTo;
-    });
+    setFrom(to);
+    setTo(from);
+
+    const tempAmount = convertedAmount ? convertedAmount.toString() : '';
+    setAmount(tempAmount);
+    setConvertedAmount(amount ? parseFloat(amount) : 0);
   };
 
   const convert = () => {
-    if (currencyInfo && currencyInfo[to]) {
+    if (currencyInfo) {
       const conversionRate = currencyInfo[to];
       const numericAmount = parseFloat(amount);
 
       if (!isNaN(numericAmount) && conversionRate) {
-        const result = numericAmount * conversionRate;
-        setConvertedAmount(result.toFixed(2));
+        setConvertedAmount(numericAmount * conversionRate);
       } else {
-        setConvertedAmount('0.00');
+        setConvertedAmount(0); // Reset if the amount or conversion rate is invalid
       }
     }
   };
-
-  useEffect(() => {
-    convert();
-  }, [currencyInfo, from, to, amount]);
 
   return (
     <div
@@ -78,7 +72,7 @@ function App() {
             <div className="w-full mt-1 mb-4">
               <InputBox
                 label="To"
-                amount={convertedAmount}
+                amount={convertedAmount ? convertedAmount.toString() : ''}
                 currencyOptions={options}
                 onCurrencyChange={(currency) => setTo(currency)}
                 selectCurrency={to}
